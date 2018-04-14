@@ -1,0 +1,30 @@
+    <div class="container-fluid" ng-controller="MainDashboardBuildings">
+      <div class="row">
+        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar" >
+          <ul class="nav nav-pills flex-column" >
+        
+            <li class="nav-item" ng-repeat="build in buildings" >
+              
+            </li>
+
+	<li class="nav-item dropdown" ng-repeat="building in buildings" >
+
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{building.Name}}</a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdown02"  ng-repeat="node in building.GroupsNodes">
+                <a class="dropdown-item" href="#/node/{{node.id}}">{{node.Name}}</a>
+              </div>
+            </li>
+
+          </ul>
+
+        </nav>
+        </div>
+
+ <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+<div >
+<h1>Bienvenido al visor de hidrometros electronicos {{me.first_name}} {{me.last_name}}! </h1>
+
+     
+</div>
+</main>

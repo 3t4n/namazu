@@ -5,7 +5,7 @@ from .models import *
 class AccelerationComponentSerializer(serializers.ModelSerializer): 
     class Meta:
         model = AccelerationComponent
-        fields = ('AccelerometerTime','XValue','YValue','ZValue')
+        fields = ('id','AccelerometerId','AccelerometerTime','XValue','YValue','ZValue')
 
 
 class AccelerometerSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class AccelerometerSerializer(serializers.ModelSerializer):
         fields = ('id','MemoryAddress','Status')  
 
 class AccelerometerWithDataSerializer(serializers.ModelSerializer):
-    Data = AccelerationComponentSerializer(many=True)
+    Data = AccelerationComponentSerializer(many=True,read_only=True)
     class Meta:
         model = Accelerometer
         fields = ('id','MemoryAddress','Status','Data')  
@@ -23,16 +23,16 @@ class NodeSerializer(serializers.ModelSerializer):
     Accelerometers = AccelerometerSerializer(many=True)
     class Meta:
         model = Node
-        fields = ('id','UserId','Shared','Synced','PingTime','Accelerometers')
+        fields = ('id','Name','UserId','Shared','Synced','PingTime','Accelerometers')
 
 class NodeSerializerWithData(NodeSerializer):
     Accelerometers = AccelerometerWithDataSerializer(many=True)    
 
 class GroupNodesSerializer(serializers.ModelSerializer):
-    Nodes = NodeSerializer(many=True)
+    #Nodes = NodeSerializer(many=True)
     class Meta:
         model = GroupNodes
-        fields = ('id','Name','Nodes')
+        fields = ('id','Name', 'Nodes')
 
 class BuildingSerializer(serializers.ModelSerializer, QueryFieldsMixin):
     GroupsNodes = GroupNodesSerializer(many=True)

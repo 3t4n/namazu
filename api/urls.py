@@ -6,5 +6,6 @@ urlpatterns = [
    url(r'^node/(?P<pk>[0-9]+)/', NodeDetail.as_view()),
    url(r'^accelerometer/(?P<pk>[0-9]+)/', AccelerometerDetail.as_view()),
    url(r'^auth/', include('auth.urls')),
-   url(r'^login/',UserView.as_view()),
+   url(r'^me/',UserView.as_view()),
+   url(r'^components/(?P<idu>.+)/$',AccelerationComponentsList.as_view()),
 ]

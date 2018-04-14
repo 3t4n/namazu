@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Building(models.Model):
+    UserId = models.ForeignKey(User) #Owner
     Name = models.CharField(max_length=255)
     GpsLatitude = models.CharField(max_length=255)
     GpsLongitude = models.CharField(max_length=255)
@@ -10,6 +11,7 @@ class Building(models.Model):
 
 class GroupNodes(models.Model):
     Name = models.CharField(max_length=255)
+    UserId = models.ForeignKey(User) #Owner
     Building = models.ForeignKey(Building, related_name="GroupsNodes")
     def __str__(self):
         return self.Name
@@ -32,7 +34,7 @@ class Accelerometer(models.Model):
 class AccelerationComponent(models.Model):
     AccelerometerId = models.ForeignKey(Accelerometer, related_name="Data") #(x,y,z) vs time
     ServerTime = models.DateField(auto_now_add=True)
-    AccelerometerTime = models.DateField()
+    AccelerometerTime = models.CharField(max_length=255)
     XValue = models.FloatField()
     YValue = models.FloatField()
     ZValue = models.FloatField()
